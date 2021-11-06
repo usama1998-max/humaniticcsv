@@ -1,0 +1,13 @@
+{
+  "category": {
+    "Call recap Short": 3,
+    "Dealership Sales Visit": 1.5,
+    "Home Services: Appointment Opportunity": 1.5,
+    "Inventory discussion+": 1,
+    "Service Setter Booked": 1,
+    "Appt booked": 1,
+    "Car Wars: Outbound Appointment Outcome": 0.6,
+    "Reason for Outbound Call": 0.5,
+    "Department": 0.4
+  }
+}
