@@ -1,0 +1,116 @@
+/* Header */
+#humanatic_header{
+    width:100%;
+}
+
+/* Alert */
+#message{
+    font-size:20px;
+}
+
+/* File upload */
+#file_drag{
+    width:500px;
+    height:50px;
+    display:block;
+    margin-top:50px;
+    background-color:lightgray;
+    overflow:hidden;
+    transition:1s;
+}
+
+#file_name{
+    margin-top:-55px;
+    display:block;
+    margin-left:-20px;
+    background-color:red;
+    width:110%;
+    height:110%;
+    opacity:0;
+}
+
+#txt{
+    background-color:white;
+    z-index:1;
+    margin-top:9px;
+    width:100%;
+    padding:5px;
+}
+
+#input_file{
+    display:block;
+    margin-top:70px;
+}
+
+/* Total NET */
+#net_box{
+    display:block;
+    margin-top:70px;
+    margin-left:auto;
+    margin-right:auto;
+    width:365px;
+}
+
+#net_label{
+    display:block;
+    text-align:left;
+}
+
+#net_output{
+    border:1px solid black;
+    display:block;
+    width:100px;
+    margin-left:250px;
+    margin-top:-31px;
+
+}
+
+/* categories and total categories */
+#category_box{
+    margin-top:80px;
+}
+
+#category_table, th, td{
+    border:2px solid black;
+    border-collapse:collapse;
+    padding:10px;
+}
+
+#category_table{
+    width:75%;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+
+/* layout Adjustments for small devices  */
+@media only screen and (max-width:380px){
+    /* File upload */
+    #file_name{
+        background-color:red;
+        width:120%;
+        margin-top:-75px;
+        opacity:0;
+    }
+
+    #file_drag{
+        width:100%;
+        height:65px;
+
+    }
+
+    #txt{
+        margin-top:7px;
+        width:100%;
+        padding:2px;
+    }
+
+
+    /*  Upload Button  */
+    #close_btn{
+        margin-top:20px;
+    }
+
+}
+
+/* END */
