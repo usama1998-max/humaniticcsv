@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/csv_viewer.css') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/humanatic_logo.ico') }}"/>
+    <title>Humanatic CSV</title>
+</head>
+<body>
+
+<!-- Heading -->
+<div class="container-fluid bg-primary" id="humanatic_header">
+<h1 class="text-center text-light pt-2 font-weight-bold display-4">Humanatic</h1>
+<h3 class="text-center text-light">CSV file viewer</h3>
+</div>
+
+
+<!-- Alert -->
+<div>
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+{% for message, category in messages %}
+    <div class="alert alert-{{category}} text-center pb-4" id="dan_alert"><span id="message">{{message}}</span>
+    <button type="button" class="btn btn-danger float-right" id="close_btn">&times;</button></div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+
+<script>
+$(document).ready(function(){
+    $("#close_btn").click(function(){
+        $("#dan_alert").hide();
+    });
+});
+</script>
+
+
+<!-- File Upload -->
+<form method="post" action="" enctype="multipart/form-data" class="text-center">
+    <div class="container-fluid rounded" id="file_drag">
+        <label id="txt" class="font-weight-bold text-secondary rounded">Drag and drop here or click to choose a file...</label>
+        <input type="file" name="file_name" id="file_name"/>
+    </div>
+    <input type="submit" value="Upload File" class="btn btn-success text-center mt-2"/>
+</form>
+
+<script>
+$(document).ready(function(){
+    var fns = document.getElementById("file_name").value;
+    $("#file_drag").on({
+        "dragover": function(){$("#file_drag").css("opacity", "0.5")},
+        "dragleave": function(){$("#file_drag").css("opacity", "1")},
+        "drop": function(){$("#file_name").on("change", function(){
+                                                            var string = this.value;
+                                                            var format_string = string.replace(/C:|fakepath|\W/gi, "");
+                                                            $("#txt").text(format_string);
+                                                            $("#file_drag").css("opacity", "1")});},
+        "click": function(){$("#file_name").on("change", function(){
+                                                            var string = this.value;
+                                                            var format_string = string.replace(/C:|fakepath|\W/gi, "");
+                                                            $("#txt").text(format_string)});},
+    });
+});
+</script>
+
+
+<!-- Total Net -->
+<div class="container-fluid text-center" id="net_box">
+    <label class="label font-weight-bold text-danger" id="net_label">After conversion into inventory: </label>
+    <span class="container-fluid text-center rounded" id="net_output">{{total_net}}</span>
+</div>
+
+
+<!-- Categories and total categories -->
+<div class="container-fluid" id="category_box">
+    <table id="category_table">
+        <tr class="bg-secondary">
+            <th>Categories</th>
+            <th>Total Categories</th>
+        </tr>
+        {% for k, v in categories_values.items() %}
+        <tr>
+            <td>{{k}}</td>
+            <td>{{v}}</td>
+        </tr>
+        {% endfor %}
+        <caption class="font-weight-bold">{{current_file}}</caption>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
